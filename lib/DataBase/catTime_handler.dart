@@ -1,4 +1,4 @@
-import 'package:cattle_weight/Screens/Pages/exportData.dart';
+
 import 'package:csv/csv.dart';
 
 import '../model/catTime.dart';
@@ -100,30 +100,6 @@ class CatTimeHelper {
     }
   }
 
-  exportSQLtoCSV() async {
-    var dbClient = await db;
-
-    final queryResult = await dbClient!
-        .query('cattime', columns: CatTimeFields.values, orderBy: "date DESC");
-
-    var csv = mapListToCsv(queryResult);
-
-    // List<List<CatTimeModel>> catTime = [<String>CatTimeFields.values,...queryResult.map((e) => CatTimeModel.fromMap(e)).toList()];
-
-    // String csv = const ListToCsvConverter().convert(catTime);
-
-    final String dir = "/storage/emulated/0/Documents";
-    final String path = '$dir/cattle_time.csv';
-
-    // create file
-    final io.File file = io.File(path);
-    // Save csv string using default configuration
-    // , as field separator
-    // " as text delimiter and
-    // \r\n as eol.
-    await file.writeAsString(csv);
-  }
-
 //  ************************** Query **************************
 
 //  ************************** Update **************************
@@ -171,50 +147,5 @@ class CatTimeHelper {
   Future close() async {
     var dbClient = await db;
     dbClient!.close();
-  }
-
-  /// Convert a map list to csv
-  String mapListToCsv(List<Map<String, dynamic>> mapList,
-      {ListToCsvConverter? converter}) {
-    if (mapList == null) {
-      return "null";
-    }
-    converter ??= const ListToCsvConverter();
-    var data = <List>[];
-    var keys = <String>[];
-    var keyIndexMap = <String, int>{};
-
-    // Add the key and fix previous records
-    int _addKey(String key) {
-      var index = keys.length;
-      keyIndexMap[key] = index;
-      keys.add(key);
-      for (var dataRow in data) {
-        dataRow.add(null);
-      }
-      return index;
-    }
-
-    for (var map in mapList) {
-      // This list might grow if a new key is found
-      var dataRow = List.filled(keyIndexMap.length, null, growable: false);
-      // Fix missing key
-      map.forEach((key, value) {
-        var keyIndex = keyIndexMap[key];
-        if (keyIndex == null) {
-          // New key is found
-          // Add it and fix previous data
-          keyIndex = _addKey(key);
-          // grow our list
-          dataRow = List.from(dataRow, growable: true)..add(value);
-        } else {
-          dataRow[keyIndex] = value;
-        }
-      });
-      data.add(dataRow);
-    }
-    return converter.convert(<List>[]
-      ..add(keys)
-      ..addAll(data));
   }
 }

@@ -7,7 +7,6 @@ import 'package:cattle_weight/Screens/Widgets/LineAndPosition.dart';
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
 import 'package:cattle_weight/Screens/Widgets/PaintLine.dart';
 import 'package:cattle_weight/Screens/Widgets/PaintPoint.dart';
-import 'package:cattle_weight/Screens/Widgets/PictureCameraRear.dart';
 import 'package:cattle_weight/Screens/Widgets/position.dart';
 import 'package:cattle_weight/Screens/Widgets/preview.dart';
 import 'package:cattle_weight/convetHex.dart';

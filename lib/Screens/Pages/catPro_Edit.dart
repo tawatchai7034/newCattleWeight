@@ -50,7 +50,8 @@ class CatProFormEditState extends State<CatProFormEdit> {
     // Build a Form widget using the _formKey created above.
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cattle Profile Form"),
+        centerTitle: true,
+        title: Text("แก้ไขข้อมูล",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,8 +60,8 @@ class CatProFormEditState extends State<CatProFormEdit> {
           child: ListView(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Name",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("ชื่อโค",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 16,
               ),
@@ -95,8 +96,8 @@ class CatProFormEditState extends State<CatProFormEdit> {
               SizedBox(
                 height: 16,
               ),
-              Text("Gender",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("เพศ",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               ListTile(
                 leading: Radio<String>(
                   value: 'male',
@@ -107,7 +108,7 @@ class CatProFormEditState extends State<CatProFormEdit> {
                     });
                   },
                 ),
-                title: const Text('Male'),
+                title: const Text('Male',style: TextStyle(fontSize: 18)),
               ),
               ListTile(
                 leading: Radio<String>(
@@ -119,13 +120,13 @@ class CatProFormEditState extends State<CatProFormEdit> {
                     });
                   },
                 ),
-                title: const Text('Female'),
+                title: const Text('Female',style: TextStyle(fontSize: 18)),
               ),
               SizedBox(
                 height: 16,
               ),
-              Text("Species",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("สายพันธุ์",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 8,
               ),
@@ -176,10 +177,10 @@ class CatProFormEditState extends State<CatProFormEdit> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('Cancel'),
+                          child: const Text('ยกเลิก'),
                         ),
                         SizedBox(
-                          width: 12,
+                          width: 18,
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -221,7 +222,7 @@ class CatProFormEditState extends State<CatProFormEdit> {
                                     builder: (context) => CatProScreen()),
                                 (Route<dynamic> route) => false);
                           },
-                          child: const Text('Submit'),
+                          child: const Text('บันทึก'),
                         ),
                       ],
                     ),

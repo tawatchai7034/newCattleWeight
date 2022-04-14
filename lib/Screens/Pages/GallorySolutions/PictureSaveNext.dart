@@ -17,7 +17,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cattle_weight/Screens/Pages/ViewPage.dart';
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
-import 'package:cattle_weight/Screens/Widgets/PictureCameraTop.dart';
 import 'package:cattle_weight/convetHex.dart';
 import 'package:image_picker/image_picker.dart';
 

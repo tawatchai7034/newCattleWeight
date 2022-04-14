@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
-import 'package:cattle_weight/Screens/Pages/SelectPicture.dart';
 import 'package:cattle_weight/convetHex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';

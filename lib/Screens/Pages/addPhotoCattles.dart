@@ -10,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:cattle_weight/Camera/cameraSide_screen.dart';
 import 'package:cattle_weight/DataBase/catImage_handler.dart';
 import 'package:cattle_weight/Screens/Pages/BlueAndCameraSolution/BluetoothPage.dart';
-import 'package:cattle_weight/Screens/Pages/GallorySolutions/AddProfile.dart';
 import 'package:cattle_weight/Screens/Pages/catImage_screen.dart';
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
 import 'package:cattle_weight/convetHex.dart';

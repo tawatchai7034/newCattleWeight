@@ -2,7 +2,6 @@ import 'package:cattle_weight/DataBase/catImage_handler.dart';
 import 'package:cattle_weight/DataBase/catPro_handler.dart';
 import 'package:cattle_weight/DataBase/catTime_handler.dart';
 import 'package:cattle_weight/Screens/Pages/ProfilePage.dart';
-import 'package:cattle_weight/Screens/Widgets/Search.dart';
 import 'package:cattle_weight/model/catPro.dart';
 import 'package:cattle_weight/Screens/Pages/catPro_Create.dart';
 import 'package:cattle_weight/Screens/Pages/catPro_Edit.dart';
@@ -46,15 +45,19 @@ class _CatProScreenState extends State<CatProScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cattle Weight"), centerTitle: true, actions: [
-        IconButton(
-            onPressed: () {
-              setState(() {
-                loadData();
-              });
-            },
-            icon: Icon(Icons.refresh)),
-      ]),
+      appBar: AppBar(
+          title: Text("หน้าหลัก",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    loadData();
+                  });
+                },
+                icon: Icon(Icons.refresh)),
+          ]),
       body: FutureBuilder(
           future: catProList,
           builder: (context, AsyncSnapshot<List<CatProModel>> snapshot) {
@@ -284,7 +287,7 @@ class _CatProScreenState extends State<CatProScreen> {
                                                                 FontWeight
                                                                     .bold)),
                                                     subtitle: Text(
-                                                        "Species: ${snapshot.data![index].species.toString()}\nGender: ${snapshot.data![index].gender.toString()}\nWeight: ${cattime.data!.weight.toStringAsFixed(4)}\tKg",
+                                                        "สายพันธ์ุ: ${snapshot.data![index].species.toString()}\nเพศ: ${snapshot.data![index].gender.toString()}\nน้ำหนัก: ${cattime.data!.weight.toStringAsFixed(4)}\tKg",
                                                         style: TextStyle(
                                                             fontSize: 18)),
                                                     trailing: IconButton(

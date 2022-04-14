@@ -50,7 +50,7 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
           if (catPro.hasData) {
             return Scaffold(
               appBar: AppBar(
-                  title: Text("${catPro.data!.name}"),
+                  title: Text("${catPro.data!.name}",style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   centerTitle: true,
                   actions: [
                     IconButton(

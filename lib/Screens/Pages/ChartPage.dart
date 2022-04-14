@@ -52,7 +52,7 @@ class ExportCsv {
     //   ..setAttribute("download", "data.csv")
     //   ..click();
     final String dir = "/storage/emulated/0/Documents";
-    final String path = '$dir/new_cattle_time.csv';
+    final String path = '$dir/${catProData.name}_Table.csv';
 
     // create file
     final io.File file = io.File(path);
@@ -129,13 +129,17 @@ class _ChartCattleState extends State<ChartCattle> {
                     }
                     return Scaffold(
                         appBar: AppBar(
-                          title: Text(widget.title),
+                          title: Text(widget.title,
+                              style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold)),
+                          centerTitle: true,
                           backgroundColor: Color(hex.hexColor("#007BA4")),
                           actions: [
                             MenuBar(
-                                catProID: widget.catProID,
-                                catTimeData: snapshot.data!,
-                                catProData: catPro.data!,)
+                              catProID: widget.catProID,
+                              catTimeData: snapshot.data!,
+                              catProData: catPro.data!,
+                            )
                           ],
                         ),
                         body: RotatedBox(
@@ -261,11 +265,10 @@ class _MenuBarState extends State<MenuBar> {
         icon: Icon(Icons.menu),
         // เมื่อเลือกเมนูแล้วจะส่งไปทำงานที่หังก์ชัน onSelected
         onSelected: (item) {
-          // dbHelper!.exportSQLtoCSV();
-          // onSelected(context, item);
           ExportCsv eportSQLtoCSV = new ExportCsv(
               catTime: widget.catTimeData, catProData: widget.catProData);
           eportSQLtoCSV.downloadData();
+          onSelected(context, item);
         },
         itemBuilder: (context) => [
               PopupMenuItem<int>(
@@ -297,12 +300,15 @@ void onSelected(BuildContext context, int item) {
               ),
               content: Text(
                 'บันทึกไฟล์เสร็จสิน',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 18),
               ),
               actions: <Widget>[
                 TextButton(
                   onPressed: () => Navigator.pop(context, 'ตกลง'),
-                  child: const Text('ตกลง'),
+                  child: const Text(
+                    'ตกลง',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ],
             );

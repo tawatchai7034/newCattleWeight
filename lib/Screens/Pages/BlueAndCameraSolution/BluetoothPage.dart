@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
-import 'package:cattle_weight/Screens/Widgets/PictureCameraSide.dart';
 import 'package:cattle_weight/convetHex.dart';
 import 'package:cattle_weight/model/catTime.dart';
 

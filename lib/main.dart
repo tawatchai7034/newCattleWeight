@@ -2,13 +2,12 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:cattle_weight/Screens/Pages/FirstPage.dart';
+
 import 'package:cattle_weight/Screens/Pages/catPro_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'convetHex.dart';
-import 'package:cattle_weight/Screens/Pages/FirstPage.dart';
-import 'package:cattle_weight/Screens/Pages/exportData.dart';
+
 
 ConvertHex hex = new ConvertHex();
 

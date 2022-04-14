@@ -7,7 +7,6 @@ import 'package:sqflite/utils/utils.dart';
 
 import 'package:cattle_weight/Bluetooth/BluetoothDeviceListEntry.dart';
 import 'package:cattle_weight/Bluetooth/ChatPage.dart';
-import 'package:cattle_weight/Screens/Widgets/PictureCameraSide.dart';
 import 'package:cattle_weight/Screens/Widgets/blueAndCameraSide.dart';
 import 'package:cattle_weight/convetHex.dart';
 import 'package:cattle_weight/model/catTime.dart';

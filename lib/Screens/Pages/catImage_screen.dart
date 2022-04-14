@@ -264,7 +264,9 @@ class _CatImageScreenState extends State<CatImageScreen> {
 
                     return Scaffold(
                       appBar: AppBar(
-                        title: Text("${catPro.data!.name}"),
+                        centerTitle: true,
+                        title: Text("${catPro.data!.name}",style: TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold)),
                         actions: [
                           IconButton(
                               onPressed: () {

@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cattle_weight/DataBase/catTime_handler.dart';
 import 'package:cattle_weight/Screens/Pages/CameraSolutions/PictureHG.dart';
-import 'package:cattle_weight/Screens/Widgets/Alerts.dart';
 import 'package:cattle_weight/Screens/Widgets/LineAndPosition.dart';
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
 import 'package:cattle_weight/Screens/Widgets/PaintLine.dart';
@@ -96,7 +95,7 @@ class _PictureRefState extends State<PictureRef> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('ยกเลิก'),
+                              child: const Text('ยกเลิก',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
                             ),
                           ),
                           Padding(
@@ -138,7 +137,7 @@ class _PictureRefState extends State<PictureRef> {
                                           catTime: widget.catTime,
                                         )));
                               },
-                              child: const Text('บันทึก'),
+                              child: const Text('บันทึก',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
                             ),
                           ),
                         ],

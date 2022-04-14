@@ -49,7 +49,8 @@ class CatProFormCreateState extends State<CatProFormCreate> {
     // Build a Form widget using the _formKey created above.
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cattle Profile Form"),
+        centerTitle: true,
+        title: Text("เพิ่มโค",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -58,12 +59,13 @@ class CatProFormCreateState extends State<CatProFormCreate> {
           child: ListView(
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Name",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("ชื่อโค",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 16,
               ),
               TextFormField(
+                
                 decoration: InputDecoration(
                   focusColor: Colors.white,
 
@@ -83,7 +85,7 @@ class CatProFormCreateState extends State<CatProFormCreate> {
                 // The validator receives the text that the user has entered.
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter name';
+                    return 'กรุณาระบุชื่อ';
                   } else {
                     cattleName = value;
                   }
@@ -93,8 +95,8 @@ class CatProFormCreateState extends State<CatProFormCreate> {
               SizedBox(
                 height: 16,
               ),
-              Text("Gender",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("เพศ",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               ListTile(
                 leading: Radio<String>(
                   value: 'male',
@@ -106,7 +108,7 @@ class CatProFormCreateState extends State<CatProFormCreate> {
                     });
                   },
                 ),
-                title: const Text('Male'),
+                title: const Text('Male',style: TextStyle(fontSize: 18)),
               ),
               ListTile(
                 leading: Radio<String>(
@@ -119,13 +121,13 @@ class CatProFormCreateState extends State<CatProFormCreate> {
                     });
                   },
                 ),
-                title: const Text('Female'),
+                title: const Text('Female',style: TextStyle(fontSize: 18)),
               ),
               SizedBox(
                 height: 16,
               ),
-              Text("Species",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("สายพันธุ์",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 8,
               ),
@@ -176,10 +178,10 @@ class CatProFormCreateState extends State<CatProFormCreate> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: const Text('Cancel'),
+                          child: const Text('ยกเลิก'),
                         ),
                         SizedBox(
-                          width: 12,
+                          width: 18,
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -208,7 +210,7 @@ class CatProFormCreateState extends State<CatProFormCreate> {
                               Navigator.pop(context);
                             }
                           },
-                          child: const Text('Submit'),
+                          child: const Text('บันทึก'),
                         ),
                       ],
                     ),

@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cattle_weight/DataBase/catTime_handler.dart';
 import 'package:cattle_weight/Screens/Pages/CameraSolutions/PictureHG.dart';
-import 'package:cattle_weight/Screens/Widgets/Alerts.dart';
 import 'package:cattle_weight/Screens/Widgets/LineAndPosition.dart';
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
 import 'package:cattle_weight/Screens/Widgets/PaintLine.dart';

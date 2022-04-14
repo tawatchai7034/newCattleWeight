@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cattle_weight/DataBase/CattleDB.dart';
 import 'package:cattle_weight/DataBase/ProfileDB.dart';
-import 'package:cattle_weight/Screens/Pages/SelectPicture.dart';
 import 'package:cattle_weight/Screens/Widgets/CattleBox.dart';
 import 'package:cattle_weight/Screens/Widgets/ProfileBox.dart';
 import 'package:cattle_weight/convetHex.dart';
@@ -14,63 +13,6 @@ import 'package:cattle_weight/convetHex.dart';
 import 'ChartPage.dart';
 
 ConvertHex hex = new ConvertHex();
-
-// class ProfilePage extends StatefulWidget {
-//   final CameraDescription camera;
-//   const ProfilePage({required this.camera});
-//   @override
-//   _ProfilePageState createState() => _ProfilePageState();
-// }
-
-// class _ProfilePageState extends State<ProfilePage> {
-//   List<CattleDB> cattle = [
-//     CattleDB("01", "cattle01", "male", "Brahman", "assets/images/cattle01.jpg",
-//         10, 20, 30),
-//     CattleDB("01", "cattle01", "male", "Brahman", "assets/images/cattle01.jpg",
-//         20, 30, 40),
-//     CattleDB("01", "cattle01", "male", "Brahman", "assets/images/cattle01.jpg",
-//         30, 40, 50),
-//     CattleDB("01", "cattle01", "male", "Brahman", "assets/images/cattle01.jpg",
-//         20, 30, 40),
-//     CattleDB("01", "cattle01", "male", "Brahman", "assets/images/cattle01.jpg",
-//         20, 30, 40),
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(
-//           "Cattle Weight",
-//           style: TextStyle(
-//             fontFamily: "boogaloo",
-//             fontSize: 24,
-//           ),
-//         ),
-//         backgroundColor: Color(hex.hexColor("#007BA4")),
-//       ),
-//       body: ListView.separated(
-//           // สร้าง card widget ตามจำนวนโคที่อยู่ใน dataBase
-//           itemBuilder: (BuildContext context, int index) {
-//             CattleDB listCattle = cattle[index];
-//             return CattleBox(
-//               cattleNumber: listCattle.cattleNumber,
-//               cattleName: listCattle.cattleName,
-//               gender: listCattle.gender,
-//               specise: listCattle.specise,
-//               img: listCattle.img,
-//               heartGirth: listCattle.heartGirth,
-//               bodyLenght: listCattle.bodyLenght,
-//               weight: listCattle.weight,
-//               camera: widget.camera,
-//             );
-//           },
-//           separatorBuilder: (BuildContext context, int index) =>
-//               const Divider(),
-//           itemCount: cattle.length),
-//     );
-//   }
-// }
 
 class CattleProfilPage extends StatefulWidget {
   const CattleProfilPage({
