@@ -14,12 +14,7 @@ ConvertHex hex = new ConvertHex();
 List<CameraDescription> cameras = [];
 
 void main() async {
-//  // Ensure that plugin services are initialized so that `availableCameras()`
-//   // can be called before `runApp()`
-//   WidgetsFlutterBinding.ensureInitialized();
 
-//   // Obtain a list of the available cameras on the device.
-//   final cameras = await availableCameras();
   try {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
@@ -30,13 +25,12 @@ void main() async {
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
 
-  runApp(Phoenix(child: new MyApp(firstCamera)));
+  runApp(Phoenix(child: new MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  final CameraDescription camera;
 
-  const MyApp(this.camera);
+  const MyApp();
 
   @override
   Widget build(BuildContext context) {
