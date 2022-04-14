@@ -214,7 +214,7 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
                             imageRear: '',
                             imageTop: '',
                             date: DateTime.now().toIso8601String(),
-                            note: "New create"))
+                            note: ""))
                         .then((value) {
                       print("Add data completed");
                       setState(() {

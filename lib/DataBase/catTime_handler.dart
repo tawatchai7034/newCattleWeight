@@ -7,6 +7,7 @@ import 'package:sqflite/sqflite.dart';
 
 import 'package:path/path.dart';
 import 'dart:io' as io;
+import 'package:moor2csv/moor2csv.dart';
 
 class CatTimeHelper {
 //  ************************** Create table **************************
@@ -122,47 +123,6 @@ class CatTimeHelper {
     // \r\n as eol.
     await file.writeAsString(csv);
   }
-
-  // generateCsv() async {
-  //   var dbClient = await db;
-
-  //   final queryResult = await dbClient!.query('cattime',
-  //       orderBy: "date DESC");
-
-  //   List<List<String>> data = [
-  //     [
-  //       CatTimeFields.id,
-  //       CatTimeFields.idPro,
-  //       CatTimeFields.weight,
-  //       CatTimeFields.bodyLenght,
-  //       CatTimeFields.heartGirth,
-  //       CatTimeFields.hearLenghtSide,
-  //       CatTimeFields.hearLenghtRear,
-  //       CatTimeFields.hearLenghtTop,
-  //       CatTimeFields.pixelReference,
-  //       CatTimeFields.distanceReference,
-  //       CatTimeFields.imageSide,
-  //       CatTimeFields.imageRear,
-  //       CatTimeFields.imageTop,
-  //       CatTimeFields.date,
-  //       CatTimeFields.note,
-  //     ],
-  //     ...queryResult.map((e) => CatTimeModel.fromMap(e)).toList()
-  //   ];
-  //   String csvData = ListToCsvConverter().convert(data);
-  //   final String directory = (await getApplicationSupportDirectory()).path;
-  //   final path = "$directory/csv-${DateTime.now()}.csv";
-  //   print(path);
-  //   final io.File file = io.File(path);
-  //   await file.writeAsString(csvData);
-  //   // Navigator.of(context).push(
-  //   //   MaterialPageRoute(
-  //   //     builder: (_) {
-  //   //       return LoadCsvDataScreen(path: path);
-  //   //     },
-  //   //   ),
-  //   // );
-  // }
 
 //  ************************** Query **************************
 

@@ -52,7 +52,8 @@ dependencies:
   permission_handler: 
   video_player: 
   csv: 
-  search_page: 
+  search_page:
+  moor2csv: 
 
 dev_dependencies:
   flutter_test:

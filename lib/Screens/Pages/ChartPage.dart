@@ -1,5 +1,7 @@
+import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:moor2csv/moor2csv.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'package:cattle_weight/DataBase/catPro_handler.dart';
@@ -7,9 +9,60 @@ import 'package:cattle_weight/DataBase/catTime_handler.dart';
 import 'package:cattle_weight/convetHex.dart';
 import 'package:cattle_weight/model/catPro.dart';
 import 'package:cattle_weight/model/catTime.dart';
+import 'dart:io' as io;
 
 // class ที่ใช้ในการแปลงค่าสีจากภายนอกมาใช้ใน flutter
 ConvertHex hex = new ConvertHex();
+
+class ExportCsv {
+  final List<CatTimeModel> catTime;
+  final CatProModel catProData;
+  ExportCsv({required this.catTime, required this.catProData});
+
+  List<List<dynamic>> rows = <List<dynamic>>[];
+  downloadData() async {
+    List<dynamic> Colum = [
+      "Cattle ID",
+      "Cattle name",
+      "Gender",
+      "Speciese",
+      "Date",
+      "Heart Girth",
+      "Body Lenght",
+      "Weight",
+      "Note"
+    ];
+    rows.add(Colum);
+    for (int i = 0; i < catTime.length; i++) {
+      List<dynamic> row = [];
+      row.add(catProData.id);
+      row.add(catProData.name.toString());
+      row.add(catProData.gender);
+      row.add(catProData.species);
+      row.add(catTime[i].date);
+      row.add(catTime[i].heartGirth);
+      row.add(catTime[i].bodyLenght);
+      row.add(catTime[i].weight);
+      row.add(catTime[i].note);
+      rows.add(row);
+    }
+
+    String csv = const ListToCsvConverter().convert(rows);
+    // new AnchorElement(href: "data:text/plain;charset=utf-8,$csv")
+    //   ..setAttribute("download", "data.csv")
+    //   ..click();
+    final String dir = "/storage/emulated/0/Documents";
+    final String path = '$dir/new_cattle_time.csv';
+
+    // create file
+    final io.File file = io.File(path);
+    // Save csv string using default configuration
+    // , as field separator
+    // " as text delimiter and
+    // \r\n as eol.
+    await file.writeAsString(csv);
+  }
+}
 
 // model for show data in chart
 class ChartData {
@@ -59,29 +112,43 @@ class _ChartCattleState extends State<ChartCattle> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: catTime,
-        builder: (context, AsyncSnapshot<List<CatTimeModel>> snapshot) {
-          if (snapshot.hasData) {
-            for (int i = snapshot.data!.length - 1; i >= 0; i--) {
-              DateTime catTimeDate = DateTime.parse(snapshot.data![i].date);
-              String convertedDateTime =
-                  "${catTimeDate.day.toString().padLeft(2, '0')}/${catTimeDate.month.toString().padLeft(2, '0')}/${catTimeDate.year.toString()} ";
-              chartData
-                  .add(ChartData(convertedDateTime, snapshot.data![i].weight));
-            }
-            return Scaffold(
-                appBar: AppBar(
-                  title: Text(widget.title),
-                  backgroundColor: Color(hex.hexColor("#007BA4")),
-                  actions: [MenuBar(catProID: widget.catProID)],
-                ),
-                body: RotatedBox(
-                  quarterTurns: 1,
-                  child: ExampleChart(
-                    title: widget.title,
-                    chartData: chartData,
-                  ),
-                ));
+        future: catProData,
+        builder: (context, AsyncSnapshot<CatProModel> catPro) {
+          if (catPro.hasData) {
+            return FutureBuilder(
+                future: catTime,
+                builder: (context, AsyncSnapshot<List<CatTimeModel>> snapshot) {
+                  if (snapshot.hasData) {
+                    for (int i = snapshot.data!.length - 1; i >= 0; i--) {
+                      DateTime catTimeDate =
+                          DateTime.parse(snapshot.data![i].date);
+                      String convertedDateTime =
+                          "${catTimeDate.day.toString().padLeft(2, '0')}/${catTimeDate.month.toString().padLeft(2, '0')}/${catTimeDate.year.toString()} ";
+                      chartData.add(ChartData(
+                          convertedDateTime, snapshot.data![i].weight));
+                    }
+                    return Scaffold(
+                        appBar: AppBar(
+                          title: Text(widget.title),
+                          backgroundColor: Color(hex.hexColor("#007BA4")),
+                          actions: [
+                            MenuBar(
+                                catProID: widget.catProID,
+                                catTimeData: snapshot.data!,
+                                catProData: catPro.data!,)
+                          ],
+                        ),
+                        body: RotatedBox(
+                          quarterTurns: 1,
+                          child: ExampleChart(
+                            title: widget.title,
+                            chartData: chartData,
+                          ),
+                        ));
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
           } else {
             return Center(child: CircularProgressIndicator());
           }
@@ -150,8 +217,15 @@ class _ExampleChartState extends State<ExampleChart> {
 }
 
 class MenuBar extends StatefulWidget {
+  final List<CatTimeModel> catTimeData;
   final int catProID;
-  const MenuBar({Key? key, required this.catProID}) : super(key: key);
+  final CatProModel catProData;
+  const MenuBar(
+      {Key? key,
+      required this.catProID,
+      required this.catTimeData,
+      required this.catProData})
+      : super(key: key);
 
   @override
   State<MenuBar> createState() => _MenuBarState();
@@ -187,8 +261,11 @@ class _MenuBarState extends State<MenuBar> {
         icon: Icon(Icons.menu),
         // เมื่อเลือกเมนูแล้วจะส่งไปทำงานที่หังก์ชัน onSelected
         onSelected: (item) {
-          dbHelper!.exportSQLtoCSV();
-          onSelected(context, item);
+          // dbHelper!.exportSQLtoCSV();
+          // onSelected(context, item);
+          ExportCsv eportSQLtoCSV = new ExportCsv(
+              catTime: widget.catTimeData, catProData: widget.catProData);
+          eportSQLtoCSV.downloadData();
         },
         itemBuilder: (context) => [
               PopupMenuItem<int>(
