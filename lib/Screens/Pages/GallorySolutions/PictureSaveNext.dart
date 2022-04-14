@@ -7,6 +7,7 @@ import 'package:cattle_weight/Camera/cameraTop_screen.dart';
 import 'package:cattle_weight/DataBase/catImage_handler.dart';
 import 'package:cattle_weight/DataBase/catTime_handler.dart';
 import 'package:cattle_weight/Screens/Pages/GallorySolutions/PictureTWTop.dart';
+import 'package:cattle_weight/Screens/Pages/ProfilePage.dart';
 import 'package:cattle_weight/Screens/Pages/catTime_screen.dart';
 import 'package:cattle_weight/model/calculation.dart';
 import 'package:cattle_weight/model/catTime.dart';
@@ -15,7 +16,7 @@ import 'package:cattle_weight/model/imageNavidation.dart';
 import 'package:cattle_weight/model/utility.dart';
 import 'package:flutter/material.dart';
 
-import 'package:cattle_weight/Screens/Pages/ViewPage.dart';
+
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
 import 'package:cattle_weight/convetHex.dart';
 import 'package:image_picker/image_picker.dart';
@@ -239,7 +240,7 @@ class _SaveNextGalloryState extends State<SaveNextGallory> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  CatTimeScreen(
+                                                  CattleProfilPage(
                                                     catProID:
                                                         snapshot.data.idPro,
                                                   )),

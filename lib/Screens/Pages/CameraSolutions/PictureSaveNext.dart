@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:cattle_weight/Camera/cameraTop_screen.dart';
 import 'package:cattle_weight/DataBase/catTime_handler.dart';
+import 'package:cattle_weight/Screens/Pages/ProfilePage.dart';
 import 'package:cattle_weight/Screens/Pages/catTime_screen.dart';
 import 'package:cattle_weight/model/calculation.dart';
 import 'package:cattle_weight/model/catTime.dart';
@@ -174,7 +175,7 @@ class _SaveNextCameraState extends State<SaveNextCamera> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  CatTimeScreen(
+                                                  CattleProfilPage(
                                                     catProID:
                                                         snapshot.data.idPro,
                                                   )),

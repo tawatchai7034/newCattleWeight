@@ -95,7 +95,7 @@ class _PictureRefState extends State<PictureRef> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('ยกเลิก',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
+                              child: const Text('ยกเลิก',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                             ),
                           ),
                           Padding(
@@ -137,7 +137,7 @@ class _PictureRefState extends State<PictureRef> {
                                           catTime: widget.catTime,
                                         )));
                               },
-                              child: const Text('บันทึก',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
+                              child: const Text('บันทึก',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                             ),
                           ),
                         ],

@@ -3,7 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:cattle_weight/Camera/cameraRear_screen.dart';
 import 'package:cattle_weight/DataBase/catTime_handler.dart';
 import 'package:cattle_weight/Screens/Pages/catTime_screen.dart';
-import 'package:cattle_weight/Screens/Widgets/LineAndPosition.dart';
+import 'package:cattle_weight/Screens/Pages/ProfilePage.dart';
 import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
 import 'package:cattle_weight/Screens/Widgets/PaintLine.dart';
 import 'package:cattle_weight/Screens/Widgets/PaintPoint.dart';
@@ -120,7 +120,7 @@ class _PictureHGTopState extends State<PictureHGTop> {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => CatTimeScreen(
+                                            builder: (context) => CattleProfilPage(
                                                   catProID: snapshot.data.idPro,
                                                 )),
                                         (route) => false);

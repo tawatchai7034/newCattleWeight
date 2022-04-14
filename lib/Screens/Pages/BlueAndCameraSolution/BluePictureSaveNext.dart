@@ -6,6 +6,7 @@ import 'package:camera/camera.dart';
 import 'package:cattle_weight/BlueCamera/BlueCameraTop_screen.dart';
 import 'package:cattle_weight/Camera/cameraTop_screen.dart';
 import 'package:cattle_weight/DataBase/catTime_handler.dart';
+import 'package:cattle_weight/Screens/Pages/ProfilePage.dart';
 import 'package:cattle_weight/Screens/Pages/catTime_screen.dart';
 import 'package:cattle_weight/Screens/Widgets/blueAndCameraTop.dart';
 import 'package:cattle_weight/model/calculation.dart';
@@ -178,7 +179,7 @@ class _BlueSaveNextCameraState extends State<BlueSaveNextCamera> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  CatTimeScreen(
+                                                  CattleProfilPage(
                                                     catProID:
                                                         snapshot.data.idPro,
                                                   )),

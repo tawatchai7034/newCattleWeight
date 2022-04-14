@@ -93,7 +93,7 @@ class _GalloryRefRearState extends State<GalloryRefRear> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: const Text('ยกเลิก',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
+                              child: const Text('ยกเลิก',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                             ),
                           ),
                           Padding(
@@ -135,7 +135,7 @@ class _GalloryRefRearState extends State<GalloryRefRear> {
                                           catTime: snapshot.data,
                                         )));
                               },
-                              child: const Text('บันทึก',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)),
+                              child: const Text('บันทึก',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                             ),
                           ),
                         ],
