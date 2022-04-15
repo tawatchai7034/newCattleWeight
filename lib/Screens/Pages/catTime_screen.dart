@@ -6,6 +6,7 @@ import 'package:cattle_weight/model/catPro.dart';
 import 'package:cattle_weight/model/catTime.dart';
 import 'package:cattle_weight/Screens/Pages/catImage_screen.dart';
 import 'package:cattle_weight/model/utility.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:intl/intl.dart';
@@ -50,7 +51,9 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
           if (catPro.hasData) {
             return Scaffold(
               appBar: AppBar(
-                  title: Text("${catPro.data!.name}",style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                  title: Text("${catPro.data!.name}",
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   centerTitle: true,
                   actions: [
                     IconButton(
@@ -83,6 +86,123 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
                                       snapshot.data![index].date);
                                   String convertedDateTime =
                                       "${catTimeDate.day.toString().padLeft(2, '0')}/${catTimeDate.month.toString().padLeft(2, '0')}/${catTimeDate.year.toString()} เวลา: ${catTimeDate.hour.toString().padLeft(2, '0')}.${catTimeDate.minute.toString().padLeft(2, '0')}";
+
+                                  void _close(BuildContext ctx) {
+                                    Navigator.of(ctx).pop();
+                                  }
+
+                                  void _show(BuildContext ctx) {
+                                    showCupertinoModalPopup(
+                                        context: ctx,
+                                        builder: (_) => CupertinoActionSheet(
+                                              actions: [
+                                                CupertinoActionSheetAction(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        Navigator.of(context).push(
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        AddPhotoCattles(
+                                                                          idPro:
+                                                                              widget.catProID,
+                                                                          idTime: snapshot
+                                                                              .data![index]
+                                                                              .id!,
+                                                                        )));
+                                                      });
+                                                      // _close(ctx);
+                                                    },
+                                                    child: const Text('Edit')),
+                                                CupertinoActionSheetAction(
+                                                    onPressed: () {
+                                                      // setState(() {
+                                                      //   onDelete();
+                                                      // });
+
+                                                      showDialog<String>(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              title: Text(
+                                                                "ลบข้อมูล ",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        20,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              content: Text(
+                                                                'คุณต้องการลบข้อมูลโคหรือไม่',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        18),
+                                                              ),
+                                                              actions: <Widget>[
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      _close(
+                                                                          ctx),
+                                                                  child:
+                                                                      const Text(
+                                                                    'ยกเลิก',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            18),
+                                                                  ),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    setState(
+                                                                        () {
+                                                                      // delete row in cattime table with snapshot.data![index].id!
+                                                                      dbHelper!.deleteCatTime(snapshot
+                                                                          .data![
+                                                                              index]
+                                                                          .id!);
+
+                                                                      // delete cattle Image in images table
+                                                                      dbImage!.deleteWithIDTime(snapshot
+                                                                          .data![
+                                                                              index]
+                                                                          .id!);
+
+                                                                      catTime =
+                                                                          dbHelper!
+                                                                              .getCatTimeListWithCatProID(widget.catProID);
+                                                                    });
+
+                                                                    _close(ctx);
+                                                                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                  },
+                                                                  child:
+                                                                      const Text(
+                                                                    'ตกลง',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            18),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          });
+                                                    },
+                                                    child:
+                                                        const Text('Delete')),
+                                              ],
+                                              cancelButton:
+                                                  CupertinoActionSheetAction(
+                                                onPressed: () => _close(ctx),
+                                                child: const Text('Close'),
+                                              ),
+                                            ));
+                                  }
+
                                   return InkWell(
                                     onTap: () {
                                       Navigator.of(context).push(
@@ -93,94 +213,53 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
                                                       idTime: snapshot
                                                           .data![index].id!)));
                                     },
-                                    child: Dismissible(
-                                      direction: DismissDirection.endToStart,
-                                      background: Container(
-                                          color: Colors.red,
-                                          alignment: Alignment.centerRight,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: Icon(Icons.delete_forever)),
-                                      onDismissed:
-                                          (DismissDirection direction) {
-                                        setState(() {
-                                          // delete row in cattime table with snapshot.data![index].id!
-                                          dbHelper!.deleteCatTime(
-                                              snapshot.data![index].id!);
-
-                                          // delete cattle Image in images table
-                                          dbImage!.deleteWithIDTime(
-                                              snapshot.data![index].id!);
-
-                                          catTime = dbHelper!
-                                              .getCatTimeListWithCatProID(
-                                                  widget.catProID);
-                                          snapshot.data!
-                                              .remove(snapshot.data![index]);
-                                        });
-                                      },
-                                      key: ValueKey<int>(
-                                          snapshot.data![index].id!),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: PhysicalModel(
-                                          color: Colors.white,
-                                          elevation: 8,
-                                          shadowColor: Colors.grey,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ListTile(
-                                              title: ((snapshot.data![index]
-                                                              .imageSide ==
-                                                          null) ||
-                                                      (snapshot.data![index]
-                                                              .imageSide ==
-                                                          ''))
-                                                  ? RotatedBox(
-                                                      quarterTurns: 0,
-                                                      child: Image.asset(
-                                                        "assets/images/SideLeftNavigation2.png",
-                                                        height: 240,
-                                                        width: 320,
-                                                      ),
-                                                    )
-                                                  : RotatedBox(
-                                                      quarterTurns: -1,
-                                                      child: Utility
-                                                          .imageFromBase64String(
-                                                              snapshot
-                                                                  .data![index]
-                                                                  .imageSide),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: PhysicalModel(
+                                        color: Colors.white,
+                                        elevation: 8,
+                                        shadowColor: Colors.grey,
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ListTile(
+                                            title: ((snapshot.data![index]
+                                                            .imageSide ==
+                                                        null) ||
+                                                    (snapshot.data![index]
+                                                            .imageSide ==
+                                                        ''))
+                                                ? RotatedBox(
+                                                    quarterTurns: 0,
+                                                    child: Image.asset(
+                                                      "assets/images/SideLeftNavigation2.png",
+                                                      height: 240,
+                                                      width: 320,
                                                     ),
-                                              subtitle: ListTile(
-                                                contentPadding:
-                                                    EdgeInsets.all(0),
-                                                title: Text(
-                                                    "น้ำหนัก: ${snapshot.data![index].weight.toStringAsFixed(4)} Kg",
-                                                    style: TextStyle(
-                                                        fontSize: 24)),
-                                                subtitle: Text(
-                                                    "ข้อความ: ${snapshot.data![index].note.toString()}\nวันที่: ${convertedDateTime}",
-                                                    style: TextStyle(
-                                                        fontSize: 18)),
-                                                trailing: IconButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).push(
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  AddPhotoCattles(
-                                                                    idPro: widget
-                                                                        .catProID,
-                                                                    idTime: snapshot
-                                                                        .data![
-                                                                            index]
-                                                                        .id!,
-                                                                  )));
-                                                    },
-                                                    icon: Icon(Icons.edit)),
-                                              ),
+                                                  )
+                                                : RotatedBox(
+                                                    quarterTurns: -1,
+                                                    child: Utility
+                                                        .imageFromBase64String(
+                                                            snapshot
+                                                                .data![index]
+                                                                .imageSide),
+                                                  ),
+                                            subtitle: ListTile(
+                                              contentPadding: EdgeInsets.all(0),
+                                              title: Text(
+                                                  "น้ำหนัก: ${snapshot.data![index].weight.toStringAsFixed(4)} Kg",
+                                                  style:
+                                                      TextStyle(fontSize: 24)),
+                                              subtitle: Text(
+                                                  "ข้อความ: ${snapshot.data![index].note.toString()}\nวันที่: ${convertedDateTime}",
+                                                  style:
+                                                      TextStyle(fontSize: 18)),
+                                              trailing: IconButton(
+                                                  onPressed: () {
+                                                    _show(context);
+                                                  },
+                                                  icon: Icon(Icons.menu)),
                                             ),
                                           ),
                                         ),
@@ -228,6 +307,8 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
                     });
                   },
                   child: const Icon(Icons.add)),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat,
             );
           } else {
             return Column(

@@ -8,6 +8,7 @@ import 'package:cattle_weight/Screens/Pages/catPro_Edit.dart';
 import 'package:cattle_weight/Screens/Pages/catTime_screen.dart';
 import 'package:cattle_weight/model/catTime.dart';
 import 'package:cattle_weight/model/utility.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 
@@ -27,6 +28,9 @@ class _CatProScreenState extends State<CatProScreen> {
 // search
   Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = const Text('My Personal Journal');
+
+  // This is what you select from the action sheet
+  String? _selectedOption;
 
   @override
   void initState() {
@@ -183,6 +187,125 @@ class _CatProScreenState extends State<CatProScreen> {
                                   future: catTimeTop,
                                   builder: (context,
                                       AsyncSnapshot<CatTimeModel> cattime) {
+                                    void _close(BuildContext ctx) {
+                                      Navigator.of(ctx).pop();
+                                    }
+
+                                    void _show(BuildContext ctx) {
+                                      showCupertinoModalPopup(
+                                          context: ctx,
+                                          builder: (_) => CupertinoActionSheet(
+                                                actions: [
+                                                  CupertinoActionSheetAction(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          Navigator.of(context).push(
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      CatProFormEdit(
+                                                                          catPro:
+                                                                              snapshot.data![index])));
+                                                        });
+                                                        // _close(ctx);
+                                                      },
+                                                      child:
+                                                          const Text('Edit')),
+                                                  CupertinoActionSheetAction(
+                                                      onPressed: () {
+                                                        // setState(() {
+                                                        //   onDelete();
+                                                        // });
+
+                                                        showDialog<String>(
+                                                            context: context,
+                                                            builder:
+                                                                (BuildContext
+                                                                    context) {
+                                                              return AlertDialog(
+                                                                title: Text(
+                                                                  "ลบข้อมูล ",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          20,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                                content: Text(
+                                                                  'คุณต้องการลบข้อมูลโคหรือไม่',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          18),
+                                                                ),
+                                                                actions: <
+                                                                    Widget>[
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        _close(
+                                                                            ctx),
+                                                                    child:
+                                                                        const Text(
+                                                                      'ยกเลิก',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              18),
+                                                                    ),
+                                                                  ),
+                                                                  TextButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      setState(
+                                                                          () {
+                                                                        // delete row in catpro table with snapshot.data![index].id!
+                                                                        dbHelper!.deleteCatPro(snapshot
+                                                                            .data![index]
+                                                                            .id!);
+
+                                                                        // delete row in cattime table with snapshot.data![index].id!
+                                                                        dbCatTime!.deleteCatTimeWithIdPro(snapshot
+                                                                            .data![index]
+                                                                            .id!);
+
+                                                                        // delete cattle Image in images table
+                                                                        dbImage!.deleteWithIDPro(snapshot
+                                                                            .data![index]
+                                                                            .id!);
+
+                                                                        catProList =
+                                                                            dbHelper!.getCatProList();
+                                                                      });
+
+                                                                      _close(
+                                                                          ctx);
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                    },
+                                                                    child:
+                                                                        const Text(
+                                                                      'ตกลง',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              18),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            });
+                                                      },
+                                                      child:
+                                                          const Text('Delete')),
+                                                ],
+                                                cancelButton:
+                                                    CupertinoActionSheetAction(
+                                                  onPressed: () => _close(ctx),
+                                                  child: const Text('Close'),
+                                                ),
+                                              ));
+                                    }
+
+                                    // This function is used to close the action sheet
+
                                     if (cattime.hasData) {
                                       DateTime catTimeDate =
                                           DateTime.parse(cattime.data!.date);
@@ -198,121 +321,67 @@ class _CatProScreenState extends State<CatProScreen> {
                                                               .data![index]
                                                               .id!)));
                                         },
-                                        child: Dismissible(
-                                          direction:
-                                              DismissDirection.endToStart,
-                                          background: Container(
-                                              color: Colors.red,
-                                              alignment: Alignment.centerRight,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10.0),
-                                              child:
-                                                  Icon(Icons.delete_forever)),
-                                          onDismissed:
-                                              (DismissDirection direction) {
-                                            setState(() {
-                                              // delete row in catpro table with snapshot.data![index].id!
-                                              dbHelper!.deleteCatPro(
-                                                  snapshot.data![index].id!);
-
-                                              // delete row in cattime table with snapshot.data![index].id!
-                                              dbCatTime!.deleteCatTimeWithIdPro(
-                                                  snapshot.data![index].id!);
-
-                                              // delete cattle Image in images table
-                                              dbImage!.deleteWithIDPro(
-                                                  snapshot.data![index].id!);
-
-                                              catProList =
-                                                  dbHelper!.getCatProList();
-                                              snapshot.data!.remove(
-                                                  snapshot.data![index]);
-                                            });
-                                          },
-                                          key: ValueKey<int>(
-                                              snapshot.data![index].id!),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: PhysicalModel(
-                                              color: Colors.white,
-                                              elevation: 8,
-                                              shadowColor: Colors.grey,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: ListTile(
-                                                  contentPadding:
-                                                      EdgeInsets.all(0),
-                                                  title:
-                                                      //  Text(
-                                                      //     "${cattime.data!.imageSide}"),
-                                                      //     RotatedBox(
-                                                      //   quarterTurns: 0,
-                                                      //   child: Image.asset(
-                                                      //     "assets/images/SideLeftNavigation2.png",
-                                                      //     height: 240,
-                                                      //     width: 360,
-                                                      //   ),
-                                                      // ),
-                                                      ((cattime.data!.imageSide ==
-                                                                  null) ||
-                                                              (cattime.data!
-                                                                      .imageSide ==
-                                                                  ''))
-                                                          ? RotatedBox(
-                                                              quarterTurns: 0,
-                                                              child:
-                                                                  Image.asset(
-                                                                "assets/images/SideLeftNavigation2.png",
-                                                                height: 240,
-                                                                width: 360,
-                                                              ),
-                                                            )
-                                                          : RotatedBox(
-                                                              quarterTurns: -1,
-                                                              child: Utility
-                                                                  .imageFromBase64String(
-                                                                      cattime
-                                                                          .data!
-                                                                          .imageSide),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: PhysicalModel(
+                                            color: Colors.white,
+                                            elevation: 8,
+                                            shadowColor: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            child: ListTile(
+                                                contentPadding:
+                                                    EdgeInsets.all(0),
+                                                title:
+                                                    //  Text(
+                                                    //     "${cattime.data!.imageSide}"),
+                                                    //     RotatedBox(
+                                                    //   quarterTurns: 0,
+                                                    //   child: Image.asset(
+                                                    //     "assets/images/SideLeftNavigation2.png",
+                                                    //     height: 240,
+                                                    //     width: 360,
+                                                    //   ),
+                                                    // ),
+                                                    ((cattime.data!.imageSide ==
+                                                                null) ||
+                                                            (cattime.data!
+                                                                    .imageSide ==
+                                                                ''))
+                                                        ? RotatedBox(
+                                                            quarterTurns: 0,
+                                                            child: Image.asset(
+                                                              "assets/images/SideLeftNavigation2.png",
+                                                              height: 240,
+                                                              width: 360,
                                                             ),
-                                                  subtitle: ListTile(
-                                                    title: Text(
-                                                        snapshot
-                                                            .data![index].name
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 24,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                    subtitle: Text(
-                                                        "สายพันธ์ุ: ${snapshot.data![index].species.toString()}\nเพศ: ${snapshot.data![index].gender.toString()}\nน้ำหนัก: ${cattime.data!.weight.toStringAsFixed(4)}\tKg",
-                                                        style: TextStyle(
-                                                            fontSize: 18)),
-                                                    trailing: IconButton(
-                                                        onPressed: () {
-                                                          Navigator.of(context).push(
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      CatProFormEdit(
-                                                                          catPro:
-                                                                              snapshot.data![index])));
-
-                                                          // dbHelper!.updateCatPro(CatProModel(
-                                                          //   id: snapshot.data![index].id!,
-                                                          //   name: "cattle01",
-                                                          //   gender: "female",
-                                                          //   species: "barhman",
-                                                          // ));
-
-                                                          // setState(() {
-                                                          //   notesList = dbHelper!.getCatProList();
-                                                          // });
-                                                        },
-                                                        icon: Icon(Icons.edit)),
-                                                  )),
-                                            ),
+                                                          )
+                                                        : RotatedBox(
+                                                            quarterTurns: -1,
+                                                            child: Utility
+                                                                .imageFromBase64String(
+                                                                    cattime
+                                                                        .data!
+                                                                        .imageSide),
+                                                          ),
+                                                subtitle: ListTile(
+                                                  title: Text(
+                                                      snapshot.data![index].name
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 24,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  subtitle: Text(
+                                                      "สายพันธ์ุ: ${snapshot.data![index].species.toString()}\nเพศ: ${snapshot.data![index].gender.toString()}\nน้ำหนัก: ${cattime.data!.weight.toStringAsFixed(4)}\tKg",
+                                                      style: TextStyle(
+                                                          fontSize: 18)),
+                                                  trailing: IconButton(
+                                                      onPressed: () {
+                                                        _show(context);
+                                                      },
+                                                      icon: Icon(Icons.menu)),
+                                                )),
                                           ),
                                         ),
                                       );
@@ -327,41 +396,7 @@ class _CatProScreenState extends State<CatProScreen> {
                                                               .data![index]
                                                               .id!)));
                                         },
-                                        child: Dismissible(
-                                          direction:
-                                              DismissDirection.endToStart,
-                                          background: Container(
-                                              color: Colors.red,
-                                              alignment: Alignment.centerRight,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10.0),
-                                              child:
-                                                  Icon(Icons.delete_forever)),
-                                          onDismissed:
-                                              (DismissDirection direction) {
-                                            setState(() {
-                                              // delete row in catpro table with snapshot.data![index].id!
-                                              dbHelper!.deleteCatPro(
-                                                  snapshot.data![index].id!);
-
-                                              // delete row in cattime table with snapshot.data![index].id!
-                                              dbCatTime!.deleteCatTimeWithIdPro(
-                                                  snapshot.data![index].id!);
-
-                                              // delete cattle Image in images table
-                                              dbImage!.deleteWithIDPro(
-                                                  snapshot.data![index].id!);
-
-                                              catProList =
-                                                  dbHelper!.getCatProList();
-                                              snapshot.data!.remove(
-                                                  snapshot.data![index]);
-                                            });
-                                          },
-                                          key: ValueKey<int>(
-                                              snapshot.data![index].id!),
-                                          child: Padding(
+                                        child:  Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: PhysicalModel(
                                               color: Colors.white,
@@ -396,29 +431,12 @@ class _CatProScreenState extends State<CatProScreen> {
                                                             fontSize: 18)),
                                                     trailing: IconButton(
                                                         onPressed: () {
-                                                          Navigator.of(context).push(
-                                                              MaterialPageRoute(
-                                                                  builder: (context) =>
-                                                                      CatProFormEdit(
-                                                                          catPro:
-                                                                              snapshot.data![index])));
-
-                                                          // dbHelper!.updateCatPro(CatProModel(
-                                                          //   id: snapshot.data![index].id!,
-                                                          //   name: "cattle01",
-                                                          //   gender: "female",
-                                                          //   species: "barhman",
-                                                          // ));
-
-                                                          // setState(() {
-                                                          //   notesList = dbHelper!.getCatProList();
-                                                          // });
+                                                          _show(context);
                                                         },
-                                                        icon: Icon(Icons.edit)),
+                                                        icon: Icon(Icons.menu)),
                                                   )),
                                             ),
                                           ),
-                                        ),
                                       );
                                     }
                                   });
@@ -431,6 +449,7 @@ class _CatProScreenState extends State<CatProScreen> {
             }
           }),
       floatingActionButton: FloatingActionButton(
+        
           onPressed: () {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => CatProFormCreate()));
@@ -451,6 +470,7 @@ class _CatProScreenState extends State<CatProScreen> {
             // });
           },
           child: const Icon(Icons.add)),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
