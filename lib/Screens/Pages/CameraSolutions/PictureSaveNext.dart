@@ -52,7 +52,8 @@ class _SaveNextCameraState extends State<SaveNextCamera> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Save page",
+          centerTitle: true,
+          title: Text("คำนวณ",
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
