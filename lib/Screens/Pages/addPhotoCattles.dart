@@ -111,6 +111,7 @@ class _AddPhotoCattlesState extends State<AddPhotoCattles> {
                 setState(() {
                   refreshImages();
                 });
+
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => GalloryRefSide(
                         imageFile: file,
@@ -118,6 +119,42 @@ class _AddPhotoCattlesState extends State<AddPhotoCattles> {
                         catTime: snapshot.data!)));
               }
             });
+          }
+
+          GalloryImage() {
+            showDialog<String>(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(
+                      "คุณสมบัติของภาพ",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    content: Text(
+                      '1. ภาพต้องไม่มืดหรือสว่างจนไม่เห็นตัวโค\n2. ภาพที่ถ่ายจากกล้องจะยังไม่สามารถนำมาคำนวนได้ ต้องบันทึกหน้าจอหรือแคปหน้าจอรูปที่ต้องการก่อน\n3.เมื่อบันทึกหน้าจอรูปที่ต้องการแล้วจึงจะนำมาคำนวณน้ำหนักได้',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text(
+                          'ยกเลิก',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          pickImageFromGallery();
+                        },
+                        child: const Text(
+                          'ตกลง',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ],
+                  );
+                });
           }
 
           if (snapshot.hasData) {
@@ -158,7 +195,7 @@ class _AddPhotoCattlesState extends State<AddPhotoCattles> {
                   ),
                   MainButton(
                       onSelected: () {
-                        pickImageFromGallery();
+                        GalloryImage();
                       },
                       title: "นำเข้าภาพ"),
                 ],

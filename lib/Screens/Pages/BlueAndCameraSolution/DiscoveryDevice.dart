@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:camera/camera.dart';
+import 'package:cattle_weight/Camera/cameraSide_screen.dart';
+import 'package:cattle_weight/Screens/Widgets/MainButton.dart';
+import 'package:cattle_weight/model/imageNavidation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:sqflite/utils/utils.dart';
@@ -13,6 +16,7 @@ import 'package:cattle_weight/model/catTime.dart';
 
 // ConvertHex convert color code from web
 ConvertHex hex = new ConvertHex();
+ImageNavidation line = new ImageNavidation();
 
 class DiscoveryPage extends StatefulWidget {
   /// If true, discovery starts on page start, otherwise user must press action button.
@@ -119,17 +123,36 @@ class _DiscoveryPage extends State<DiscoveryPage> {
                 Navigator.of(context).pop(result.device);
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => BlueAndCameraSide(
-                          server: result.device,
-                          idPro: widget.idPro,
-                          idTime: widget.idTime,
-                          catTime: widget.catTime
-                          // camera: widget.camera,
+                        server: result.device,
+                        idPro: widget.idPro,
+                        idTime: widget.idTime,
+                        catTime: widget.catTime
+                        // camera: widget.camera,
                         )));
               },
             );
           },
         ),
       ]),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+      //   child: Container(
+      //       width: double.infinity,
+      //       height: 56,
+      //       child: MainButton(
+      //           onSelected: () {
+      //             Navigator.of(context).push(MaterialPageRoute(
+      //                 builder: (context) => CameraSideScreen(
+      //                       idPro: widget.idPro,
+      //                       idTime: widget.idTime,
+      //                       localFront: line.sideLeft,
+      //                       localBack: line.sideRight,
+      //                       catTime: widget.catTime,
+      //                     )));
+      //           },
+      //           title: "ไม่เชื่อมต่ออุปกรณ์"),
+      //     ),
+      // ),
     );
   }
 }

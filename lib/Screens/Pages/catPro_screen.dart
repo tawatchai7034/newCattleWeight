@@ -8,9 +8,50 @@ import 'package:cattle_weight/Screens/Pages/catPro_Edit.dart';
 import 'package:cattle_weight/Screens/Pages/catTime_screen.dart';
 import 'package:cattle_weight/model/catTime.dart';
 import 'package:cattle_weight/model/utility.dart';
+import 'package:csv/csv.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
+import 'dart:io' as io;
+
+  class CatProExportCsv {
+  final List<CatProModel> catProData;
+  CatProExportCsv({required this.catProData});
+
+  List<List<dynamic>> rows = <List<dynamic>>[];
+  downloadData() async {
+    List<dynamic> Colum = [
+      "Cattle ID",
+      "Cattle name",
+      "Gender",
+      "Speciese",
+    ];
+    rows.add(Colum);
+    for (int i = 0; i < catProData.length; i++) {
+      List<dynamic> row = [];
+      row.add(catProData[i].id);
+      row.add(catProData[i].name.toString());
+      row.add(catProData[i].gender);
+      row.add(catProData[i].species);
+      rows.add(row);
+    }
+
+    String csv = const ListToCsvConverter().convert(rows);
+    // new AnchorElement(href: "data:text/plain;charset=utf-8,$csv")
+    //   ..setAttribute("download", "data.csv")
+    //   ..click();
+    final String dir = "/storage/emulated/0/Documents";
+    final String path = '$dir/CattleList_${DateTime.now().toIso8601String()}.csv';
+
+    // create file
+    final io.File file = io.File(path);
+    // Save csv string using default configuration
+    // , as field separator
+    // " as text delimiter and
+    // \r\n as eol.
+    await file.writeAsString(csv);
+  }
+}
 
 class CatProScreen extends StatefulWidget {
   const CatProScreen({Key? key}) : super(key: key);
@@ -54,6 +95,13 @@ class _CatProScreenState extends State<CatProScreen> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           centerTitle: true,
           actions: [
+            //  IconButton(
+            //     onPressed: () {
+            //       // setState(() {
+            //       //   loadData();
+            //       // });
+            //     },
+            //     icon: Icon(Icons.save)),
             IconButton(
                 onPressed: () {
                   setState(() {

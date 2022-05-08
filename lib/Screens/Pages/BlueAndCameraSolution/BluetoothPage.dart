@@ -91,48 +91,49 @@ class _BlueMainPage extends State<BlueMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   title: const Text('Flutter Bluetooth Serial'),
-        // ),
-        body: _bluetoothState.isEnabled
-            ? DiscoveryPage(
-                start: true,
-                idPro: widget.idPro,
-                idTime: widget.idTime,
-                catTime: widget.catTime
-                // camera: widget.camera,
+      // appBar: AppBar(
+      //   title: const Text('Flutter Bluetooth Serial'),
+      // ),
+      body: _bluetoothState.isEnabled
+          ? DiscoveryPage(
+              start: true,
+              idPro: widget.idPro,
+              idTime: widget.idTime,
+              catTime: widget.catTime
+              // camera: widget.camera,
               )
-            : Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 100),
-                    Container(
-                        child: Text(
-                      "กรุณาเชื่อมต่อบลูทูธ",
-                      style: TextStyle(fontSize: 36),
-                    )),
-                    SizedBox(height: 270),
-                    Center(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        MainButton(
-                            onSelected: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => CameraSideScreen(
-                                        idPro: widget.idPro,
-                                        idTime: widget.idTime,
-                                        localFront: line.sideLeft,
-                                        localBack: line.sideRight,
-                                        catTime: widget.catTime,
-                                      )));
-                            },
-                            title: "ไม่เชื่อมต่ออุปกรณ์"),
-                      ],
-                    ))
-                  ],
-                ),
-              ));
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 100),
+                  Container(
+                      child: Text(
+                    "กรุณาเปิดบลูทูธ",
+                    style: TextStyle(fontSize: 36),
+                  )),
+                ],
+              ),
+            ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+        child: Container(
+          width: double.infinity,
+          height: 56,
+          child: MainButton(
+              onSelected: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CameraSideScreen(
+                          idPro: widget.idPro,
+                          idTime: widget.idTime,
+                          localFront: line.sideLeft,
+                          localBack: line.sideRight,
+                          catTime: widget.catTime,
+                        )));
+              },
+              title: "ไม่เชื่อมต่ออุปกรณ์"),
+        ),
+      ),
+    );
   }
 }
