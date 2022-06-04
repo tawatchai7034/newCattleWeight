@@ -4,7 +4,7 @@ class CattleCalculation {
   double InToCm = 0.39370;
   double LbToKg = 0.45359;
   double weightErr = 0.2556965733;
-  double hg_Err = 0.05361450207;
+  double hg_Err = 0.1137;
   double bl_Err = 0.2197;
 
   double pixelDistance(double x1, double y1, double x2, double y2) {

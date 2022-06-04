@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import 'dart:io' as io;
 
-  class CatProExportCsv {
+class CatProExportCsv {
   final List<CatProModel> catProData;
   CatProExportCsv({required this.catProData});
 
@@ -41,7 +41,8 @@ import 'dart:io' as io;
     //   ..setAttribute("download", "data.csv")
     //   ..click();
     final String dir = "/storage/emulated/0/Documents";
-    final String path = '$dir/CattleList_${DateTime.now().toIso8601String()}.csv';
+    final String path =
+        '$dir/CattleList_${DateTime.now().toIso8601String()}.csv';
 
     // create file
     final io.File file = io.File(path);
@@ -151,7 +152,7 @@ class _CatProScreenState extends State<CatProScreen> {
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          CatTimeScreen(
+                                                          CattleProfilPage(
                                                             catProID:
                                                                 catPro.id!,
                                                           )));
@@ -444,47 +445,45 @@ class _CatProScreenState extends State<CatProScreen> {
                                                               .data![index]
                                                               .id!)));
                                         },
-                                        child:  Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: PhysicalModel(
-                                              color: Colors.white,
-                                              elevation: 8,
-                                              shadowColor: Colors.grey,
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                              child: ListTile(
-                                                  contentPadding:
-                                                      EdgeInsets.all(0),
-                                                  title: RotatedBox(
-                                                    quarterTurns: 0,
-                                                    child: Image.asset(
-                                                      "assets/images/SideLeftNavigation2.png",
-                                                      height: 240,
-                                                      width: 360,
-                                                    ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: PhysicalModel(
+                                            color: Colors.white,
+                                            elevation: 8,
+                                            shadowColor: Colors.grey,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            child: ListTile(
+                                                contentPadding:
+                                                    EdgeInsets.all(0),
+                                                title: RotatedBox(
+                                                  quarterTurns: 0,
+                                                  child: Image.asset(
+                                                    "assets/images/SideLeftNavigation2.png",
+                                                    height: 240,
+                                                    width: 360,
                                                   ),
-                                                  subtitle: ListTile(
-                                                    title: Text(
-                                                        snapshot
-                                                            .data![index].name
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontSize: 24,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold)),
-                                                    subtitle: Text(
-                                                        "Gender: ${snapshot.data![index].gender.toString()}\nSpecies: ${snapshot.data![index].species.toString()}",
-                                                        style: TextStyle(
-                                                            fontSize: 18)),
-                                                    trailing: IconButton(
-                                                        onPressed: () {
-                                                          _show(context);
-                                                        },
-                                                        icon: Icon(Icons.menu)),
-                                                  )),
-                                            ),
+                                                ),
+                                                subtitle: ListTile(
+                                                  title: Text(
+                                                      snapshot.data![index].name
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontSize: 24,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  subtitle: Text(
+                                                      "Gender: ${snapshot.data![index].gender.toString()}\nSpecies: ${snapshot.data![index].species.toString()}",
+                                                      style: TextStyle(
+                                                          fontSize: 18)),
+                                                  trailing: IconButton(
+                                                      onPressed: () {
+                                                        _show(context);
+                                                      },
+                                                      icon: Icon(Icons.menu)),
+                                                )),
                                           ),
+                                        ),
                                       );
                                     }
                                   });
@@ -497,7 +496,6 @@ class _CatProScreenState extends State<CatProScreen> {
             }
           }),
       floatingActionButton: FloatingActionButton(
-        
           onPressed: () {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => CatProFormCreate()));
@@ -518,7 +516,7 @@ class _CatProScreenState extends State<CatProScreen> {
             // });
           },
           child: const Icon(Icons.add)),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
