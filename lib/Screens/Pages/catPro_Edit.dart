@@ -66,6 +66,7 @@ class CatProFormEditState extends State<CatProFormEdit> {
                 height: 16,
               ),
               TextFormField(
+                style: TextStyle(fontSize: 24),
                 decoration: InputDecoration(
                   focusColor: Colors.white,
 

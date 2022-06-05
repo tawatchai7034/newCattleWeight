@@ -63,6 +63,7 @@ class _PictureRefRearState extends State<PictureRefRear> {
             ),
             content: TextField(
               keyboardType: TextInputType.number,
+              style: TextStyle(fontSize: 24),
               onChanged: (value) {
                 setState(() {
                   valueText = value;

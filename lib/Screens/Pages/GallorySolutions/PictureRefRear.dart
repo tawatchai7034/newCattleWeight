@@ -64,6 +64,7 @@ class _GalloryRefRearState extends State<GalloryRefRear> {
             ),
             content: TextField(
               keyboardType: TextInputType.number,
+              style: TextStyle(fontSize: 18),
               onChanged: (value) {
                 setState(() {
                   valueText = value;
