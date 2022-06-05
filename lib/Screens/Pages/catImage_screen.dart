@@ -124,7 +124,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                     List<DataRow> _createRows() {
                       return [
                         DataRow(cells: [
-                          DataCell(Text('${CatProFields.name}',
+                          DataCell(Text('ชื่อโค',
                               style: TextStyle(
                                 fontSize: 24,
                               ))),
@@ -144,7 +144,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                               icon: Icon(Icons.edit))),
                         ]),
                         DataRow(cells: [
-                          DataCell(Text('${CatProFields.gender}',
+                          DataCell(Text('เพศ',
                               style: TextStyle(
                                 fontSize: 24,
                               ))),
@@ -160,7 +160,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                               icon: Icon(Icons.edit))),
                         ]),
                         DataRow(cells: [
-                          DataCell(Text('${CatProFields.species}',
+                          DataCell(Text('สายพันธุ์',
                               style: TextStyle(
                                 fontSize: 24,
                               ))),
@@ -176,7 +176,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                               icon: Icon(Icons.edit))),
                         ]),
                         DataRow(cells: [
-                          DataCell(Text('${CatTimeFields.heartGirth}',
+                          DataCell(Text('รอบอก',
                               style: TextStyle(
                                 fontSize: 24,
                               ))),
@@ -187,7 +187,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                           DataCell(Text('')),
                         ]),
                         DataRow(cells: [
-                          DataCell(Text('${CatTimeFields.bodyLenght}',
+                          DataCell(Text('ความยาวลำตัว',
                               style: TextStyle(
                                 fontSize: 24,
                               ))),
@@ -198,7 +198,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                           DataCell(Text('')),
                         ]),
                         DataRow(cells: [
-                          DataCell(Text('${CatTimeFields.weight}\t(Kg)',
+                          DataCell(Text('น้ำหนัก\t(Kg)',
                               style: TextStyle(
                                 fontSize: 24,
                               ))),
@@ -210,7 +210,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                         ]),
                         DataRow(cells: [
                           DataCell(Text(
-                            '${CatTimeFields.date}',
+                            'วันที่',
                             style: TextStyle(
                               fontSize: 24,
                             ),
@@ -226,7 +226,7 @@ class _CatImageScreenState extends State<CatImageScreen> {
                           DataCell(Text('')),
                         ]),
                         DataRow(cells: [
-                          DataCell(Text('${CatTimeFields.note}',
+                          DataCell(Text('ข้อความ',
                               style: TextStyle(
                                 fontSize: 24,
                               ))),

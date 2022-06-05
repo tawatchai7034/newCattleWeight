@@ -113,7 +113,7 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
                                                       });
                                                       // _close(ctx);
                                                     },
-                                                    child: const Text('Edit')),
+                                                    child: const Text('แก้ไข')),
                                                 CupertinoActionSheetAction(
                                                     onPressed: () {
                                                       // setState(() {
@@ -193,12 +193,12 @@ class _CatTimeScreenState extends State<CatTimeScreen> {
                                                           });
                                                     },
                                                     child:
-                                                        const Text('Delete')),
+                                                        const Text('ลบ')),
                                               ],
                                               cancelButton:
                                                   CupertinoActionSheetAction(
                                                 onPressed: () => _close(ctx),
-                                                child: const Text('Close'),
+                                                child: const Text('ยกเลิก'),
                                               ),
                                             ));
                                   }
