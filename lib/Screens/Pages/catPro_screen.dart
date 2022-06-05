@@ -188,7 +188,7 @@ class _CatProScreenState extends State<CatProScreen> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      CatTimeScreen(
+                                                      CattleProfilPage(
                                                         catProID:
                                                             catProData.id!,
                                                       )));
