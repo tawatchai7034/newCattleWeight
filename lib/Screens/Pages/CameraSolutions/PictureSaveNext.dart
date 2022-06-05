@@ -186,20 +186,20 @@ class _SaveNextCameraState extends State<SaveNextCamera> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                MainButton(
-                                    onSelected: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CameraTopScreen(
-                                                    idPro: snapshot.data.idPro,
-                                                    idTime: snapshot.data.id,
-                                                    localFront: line.TopRight,
-                                                    localBack: line.TopLeft,
-                                                    catTime: snapshot.data,
-                                                  )));
-                                    },
-                                    title: "ถ่ายภาพกระดูกสันหลังโค"),
+                                // MainButton(
+                                //     onSelected: () {
+                                //       Navigator.of(context).push(
+                                //           MaterialPageRoute(
+                                //               builder: (context) =>
+                                //                   CameraTopScreen(
+                                //                     idPro: snapshot.data.idPro,
+                                //                     idTime: snapshot.data.id,
+                                //                     localFront: line.TopRight,
+                                //                     localBack: line.TopLeft,
+                                //                     catTime: snapshot.data,
+                                //                   )));
+                                //     },
+                                //     title: "ถ่ายภาพกระดูกสันหลังโค"),
                               ])
                         ]),
                   );

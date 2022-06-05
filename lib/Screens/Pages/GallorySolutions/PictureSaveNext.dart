@@ -286,11 +286,11 @@ class _SaveNextGalloryState extends State<SaveNextGallory> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                MainButton(
-                                    onSelected: () {
-                                      GalloryImage();
-                                    },
-                                    title: "ถ่ายภาพกระดูกสันหลังโค"),
+                                // MainButton(
+                                //     onSelected: () {
+                                //       GalloryImage();
+                                //     },
+                                //     title: "ถ่ายภาพกระดูกสันหลังโค"),
                               ])
                         ]),
                   );

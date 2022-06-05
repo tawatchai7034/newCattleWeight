@@ -57,13 +57,12 @@ class CatProHelper {
     final queryResult = await dbClient!.query('catpro',
         columns: ['id', 'name', 'gender', 'species'],
         where: "id = ?",
-        whereArgs: [id]);
-
+        whereArgs: [id],
+        orderBy: "name DESC");
     return queryResult;
   }
 
-  
-    Future<CatProModel> getCatProWithID(int id) async {
+  Future<CatProModel> getCatProWithID(int id) async {
     var dbClient = await db;
 
     final queryResult = await dbClient!.query(
@@ -72,7 +71,7 @@ class CatProHelper {
       where: 'id = ?',
       whereArgs: [id],
     );
-    
+
     if (queryResult.isNotEmpty) {
       return CatProModel.fromJson(queryResult.first);
     } else {

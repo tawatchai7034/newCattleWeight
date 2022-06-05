@@ -190,19 +190,19 @@ class _BlueSaveNextCameraState extends State<BlueSaveNextCamera> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                MainButton(
-                                    onSelected: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BlueAndCameraTop(
-                                                    idPro: snapshot.data.idPro,
-                                                    idTime: snapshot.data.id,
-                                                    catTime: snapshot.data,
-                                                    server: widget.server,
-                                                  )));
-                                    },
-                                    title: "ถ่ายภาพกระดูกสันหลังโค"),
+                                // MainButton(
+                                //     onSelected: () {
+                                //       Navigator.of(context).push(
+                                //           MaterialPageRoute(
+                                //               builder: (context) =>
+                                //                   BlueAndCameraTop(
+                                //                     idPro: snapshot.data.idPro,
+                                //                     idTime: snapshot.data.id,
+                                //                     catTime: snapshot.data,
+                                //                     server: widget.server,
+                                //                   )));
+                                //     },
+                                //     title: "ถ่ายภาพกระดูกสันหลังโค"),
                               ])
                         ]),
                   );
